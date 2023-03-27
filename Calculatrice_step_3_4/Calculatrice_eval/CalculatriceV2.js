@@ -43,7 +43,7 @@ class BaseCalculator {
         }
     
         else{ 
-            this.ajoutchar(buttonText)
+            baseCalculator.ajoutchar(buttonText)
             //ajoutchar(buttonText)
             return;
         }
