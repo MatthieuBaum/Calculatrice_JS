@@ -7,29 +7,20 @@ class BaseCalculator {
         this.result = document.querySelector(".resultat");
         this.keys = document.querySelectorAll("button");
         this.keys.forEach(key=>{
-            key.addEventListener("click",this.calculate);
+            key.addEventListener("click", (event) =>this.calculate(event));
         });
     }
 
     ajoutchar(n){
-        switch (n){
-            case '×':
-                n='*';
-                break;
-            case '÷':
-                n='/';
-                break;
-        }
         (this.display).textContent += n;
         return
     }
 
 
-    calculate(){
-        var buttonText = this.innerHTML;
-        console.log(buttonText);
+    calculate(event){
+        var buttonText = event.srcElement.innerHTML;
         if(buttonText==="AC"){
-            baseCalculator.clear();
+            this.clear();
             return;
         }
     
@@ -37,18 +28,26 @@ class BaseCalculator {
             (this.display).innerHTML = this.display.innerHTML.substr(0,this.display.innerHTML.length-1);
             return;
         }
-    
+        
         if(buttonText === "="){
-            baseCalculator.total();
+            this.total();
+            return;
         }
-    
-        else{ 
-            baseCalculator.ajoutchar(buttonText)
-            //ajoutchar(buttonText)
+
+        if(buttonText === "×"){
+            this.display.innerHTML+='*';
+            return;
+        }
+
+        if(buttonText === "÷"){
+            this.display.innerHTML+='/';
             return;
         }
     
-      
+        else{ 
+            this.ajoutchar(buttonText)
+            return;
+        }    
     }
 
     clear(){
